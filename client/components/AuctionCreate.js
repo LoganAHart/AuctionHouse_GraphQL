@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 class AuctionCreate extends Component {
@@ -10,14 +11,17 @@ class AuctionCreate extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-
-
+    this.props.mutate({
+      variables: {
+        title: this.state.title
+      }
+    });
   }
 
   render() {
     return (
       <div>
-        <h3>Create a New Auction</h3>
+        <h3>Create New Auction</h3>
         <form onSubmit={ this.onSubmit.bind(this) }>
           <label>Auction Title:</label>
           <input 
@@ -30,13 +34,12 @@ class AuctionCreate extends Component {
   }
 }
 
-// const mutation = gql`
-//   mutation {
-//     addAuction(title: ) {
-//       id
-//       title
-//     }
-//   }
-// `;
+const mutation = gql`
+  mutation AddAuction($title: String) {
+    addAuction(title: $title) {
+      title
+    }
+  }
+`;
 
-export default AuctionCreate;
+export default graphql(mutation)(AuctionCreate);
