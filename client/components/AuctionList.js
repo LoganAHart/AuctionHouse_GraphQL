@@ -15,7 +15,9 @@ class AuctionList extends Component {
     return this.props.data.auctions.map(({ id, title }) => {
       return (
         <li key={ id } className="collection-item">
-          { title }
+          <Link to={ `auctions/${ id }` }>
+            { title }
+          </Link>
           <i
             className="material-icons"
             onClick={ () => this.onAuctionDelete(id) }
@@ -28,7 +30,7 @@ class AuctionList extends Component {
   }
 
   render() {
-    if (this.props.data.loading) { return <div>Loading... </div>; }
+    if (this.props.data.loading) { return <div></div>; }
     return (
       <div>
         <ul className="collection">

@@ -8,6 +8,7 @@ import './style/style.css'
 import App from './components/App';
 import AuctionList from './components/AuctionList';
 import AuctionCreate from './components/AuctionCreate';
+import AuctionDetail from './components/AuctionDetail';
 
 const client = new ApolloClient({});
 
@@ -18,6 +19,7 @@ const Root = () => {
         <Route path="/" component={App}>
           <IndexRoute component={AuctionList} />
           <Route path="auctions/new" component={AuctionCreate} />
+          <Route path="auctions/:id" component={AuctionDetail} />
         </Route>
       </Router>
     </ApolloProvider>
