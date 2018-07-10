@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, hashHistory } from 'react-router';
+import queryAuctions from '../queries/fetchAuctions';
+
 
 class AuctionCreate extends Component {
   constructor(props) {
@@ -13,9 +15,8 @@ class AuctionCreate extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.mutate({
-      variables: {
-        title: this.state.title
-      }
+      variables: { title: this.state.title },
+      refetchQueries: [{ query: queryAuctions }]
     }).then(() => hashHistory.push('/'))
   }
 

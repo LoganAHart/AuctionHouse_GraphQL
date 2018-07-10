@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
+import queryAuctions from '../queries/fetchAuctions';
 
 class AuctionList extends Component {
 
@@ -12,7 +13,7 @@ class AuctionList extends Component {
           {auction.title}
         </li>
       );
-    })
+    });
   }
 
   render() {
@@ -33,13 +34,4 @@ class AuctionList extends Component {
   }
 }
 
-const query = gql`
-  {
-    auctions {
-      id
-      title
-    }
-  }
-`;
-
-export default graphql(query)(AuctionList);
+export default graphql(queryAuctions)(AuctionList);
