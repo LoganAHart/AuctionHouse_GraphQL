@@ -39,7 +39,7 @@ const mutation = new GraphQLObjectType({
       type: AuctionType,
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
-        return Auction.remove({ _id: id });
+        return Auction.findOneAndRemove({ _id: id });
       }
     }
   }

@@ -6,11 +6,22 @@ import queryAuctions from '../queries/fetchAuctions';
 
 class AuctionList extends Component {
 
+  onAuctionDelete(id) {
+    this.props.mutate({ variables: { id } })
+      .then(() => this.props.data.refetch());
+  }
+
   renderAuctions() {
-    return this.props.data.auctions.map(auction => {
+    return this.props.data.auctions.map(({ id, title }) => {
       return (
-        <li key={auction.id} className="collection-item">
-          {auction.title}
+        <li key={ id } className="collection-item">
+          { title }
+          <i
+            className="material-icons"
+            onClick={ () => this.onAuctionDelete(id) }
+          >
+            delete
+          </i>
         </li>
       );
     });
@@ -34,4 +45,14 @@ class AuctionList extends Component {
   }
 }
 
-export default graphql(queryAuctions)(AuctionList);
+const mutation = gql`
+  mutation DeleteAuction($id: ID) {
+    deleteAuction(id: $id) {
+      id
+    }
+  }
+`;
+
+export default graphql(mutation)(
+  graphql(queryAuctions)(AuctionList)
+);
