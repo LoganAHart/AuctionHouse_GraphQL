@@ -5,6 +5,10 @@ export default gql`
     auction(id: $id) {
       id
       title
+      items {
+        id
+        content
+      }
     }
   }
 `;

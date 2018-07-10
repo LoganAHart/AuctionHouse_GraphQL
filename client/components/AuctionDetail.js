@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import fetchAuction from '../queries/fetchAuctionByID';
+import ItemCreate from './ItemCreate';
+import ItemList from './ItemList';
 
 class AuctionDetail extends Component {
   render() {
@@ -12,6 +14,8 @@ class AuctionDetail extends Component {
       <div>
         <Link to="/">Back</Link>
         <h3>{ auction.title }</h3>
+        <ItemList items={auction.items} />
+        <ItemCreate auctionId={ this.props.params.id }/>
       </div>
     );
   }

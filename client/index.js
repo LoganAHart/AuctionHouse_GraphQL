@@ -10,7 +10,9 @@ import AuctionList from './components/AuctionList';
 import AuctionCreate from './components/AuctionCreate';
 import AuctionDetail from './components/AuctionDetail';
 
-const client = new ApolloClient({});
+const client = new ApolloClient({
+  dataIdFromObject: obj => obj.id
+});
 
 const Root = () => {
   return (
