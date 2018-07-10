@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Link, hashHistory } from 'react-router';
 
 class AuctionCreate extends Component {
   constructor(props) {
@@ -15,12 +16,13 @@ class AuctionCreate extends Component {
       variables: {
         title: this.state.title
       }
-    });
+    }).then(() => hashHistory.push('/'))
   }
 
   render() {
     return (
       <div>
+        <Link to="/">Back</Link>
         <h3>Create New Auction</h3>
         <form onSubmit={ this.onSubmit.bind(this) }>
           <label>Auction Title:</label>
